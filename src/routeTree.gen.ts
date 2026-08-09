@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PortefeuilleRouteImport } from './routes/portefeuille'
+import { Route as BiensIdRouteImport } from './routes/biens.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +23,40 @@ const PortefeuilleRoute = PortefeuilleRouteImport.update({
   path: '/portefeuille',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BiensIdRoute = BiensIdRouteImport.update({
+  id: '/biens/$id',
+  path: '/biens/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/portefeuille': typeof PortefeuilleRoute
+  '/biens/$id': typeof BiensIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/portefeuille': typeof PortefeuilleRoute
+  '/biens/$id': typeof BiensIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/portefeuille': typeof PortefeuilleRoute
+  '/biens/$id': typeof BiensIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/portefeuille'
+  fullPaths: '/' | '/portefeuille' | '/biens/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/portefeuille'
-  id: '__root__' | '/' | '/portefeuille'
+  to: '/' | '/portefeuille' | '/biens/$id'
+  id: '__root__' | '/' | '/portefeuille' | '/biens/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PortefeuilleRoute: typeof PortefeuilleRoute
+  BiensIdRoute: typeof BiensIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortefeuilleRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/biens/$id': {
+      id: '/biens/$id'
+      path: '/biens/$id'
+      fullPath: '/biens/$id'
+      preLoaderRoute: typeof BiensIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PortefeuilleRoute: PortefeuilleRoute,
+  BiensIdRoute: BiensIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

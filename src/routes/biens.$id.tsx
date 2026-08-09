@@ -55,7 +55,7 @@ export const Route = createFileRoute("/biens/$id")({
 });
 
 function PropertyDetail() {
-  const { property } = Route.useLoaderData();
+  const { property } = Route.useLoaderData() as { property: Property };
   const requirement = useRequirement();
   const { score, criteria } = scoreProperty(property, requirement);
 
