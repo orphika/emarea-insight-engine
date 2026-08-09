@@ -14,6 +14,7 @@ import { Route as BesoinRouteImport } from './routes/besoin'
 import { Route as DossierRouteImport } from './routes/dossier'
 import { Route as MatchingRouteImport } from './routes/matching'
 import { Route as PortefeuilleRouteImport } from './routes/portefeuille'
+import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as TempsRouteImport } from './routes/temps'
 import { Route as BiensIdRouteImport } from './routes/biens.$id'
 
@@ -42,6 +43,11 @@ const PortefeuilleRoute = PortefeuilleRouteImport.update({
   path: '/portefeuille',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RoadmapRoute = RoadmapRouteImport.update({
+  id: '/roadmap',
+  path: '/roadmap',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TempsRoute = TempsRouteImport.update({
   id: '/temps',
   path: '/temps',
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/dossier': typeof DossierRoute
   '/matching': typeof MatchingRoute
   '/portefeuille': typeof PortefeuilleRoute
+  '/roadmap': typeof RoadmapRoute
   '/temps': typeof TempsRoute
   '/biens/$id': typeof BiensIdRoute
 }
@@ -68,6 +75,7 @@ export interface FileRoutesByTo {
   '/dossier': typeof DossierRoute
   '/matching': typeof MatchingRoute
   '/portefeuille': typeof PortefeuilleRoute
+  '/roadmap': typeof RoadmapRoute
   '/temps': typeof TempsRoute
   '/biens/$id': typeof BiensIdRoute
 }
@@ -78,6 +86,7 @@ export interface FileRoutesById {
   '/dossier': typeof DossierRoute
   '/matching': typeof MatchingRoute
   '/portefeuille': typeof PortefeuilleRoute
+  '/roadmap': typeof RoadmapRoute
   '/temps': typeof TempsRoute
   '/biens/$id': typeof BiensIdRoute
 }
@@ -89,6 +98,7 @@ export interface FileRouteTypes {
     | '/dossier'
     | '/matching'
     | '/portefeuille'
+    | '/roadmap'
     | '/temps'
     | '/biens/$id'
   fileRoutesByTo: FileRoutesByTo
@@ -98,6 +108,7 @@ export interface FileRouteTypes {
     | '/dossier'
     | '/matching'
     | '/portefeuille'
+    | '/roadmap'
     | '/temps'
     | '/biens/$id'
   id:
@@ -107,6 +118,7 @@ export interface FileRouteTypes {
     | '/dossier'
     | '/matching'
     | '/portefeuille'
+    | '/roadmap'
     | '/temps'
     | '/biens/$id'
   fileRoutesById: FileRoutesById
@@ -117,6 +129,7 @@ export interface RootRouteChildren {
   DossierRoute: typeof DossierRoute
   MatchingRoute: typeof MatchingRoute
   PortefeuilleRoute: typeof PortefeuilleRoute
+  RoadmapRoute: typeof RoadmapRoute
   TempsRoute: typeof TempsRoute
   BiensIdRoute: typeof BiensIdRoute
 }
@@ -158,6 +171,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortefeuilleRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/roadmap': {
+      id: '/roadmap'
+      path: '/roadmap'
+      fullPath: '/roadmap'
+      preLoaderRoute: typeof RoadmapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/temps': {
       id: '/temps'
       path: '/temps'
@@ -181,6 +201,7 @@ const rootRouteChildren: RootRouteChildren = {
   DossierRoute: DossierRoute,
   MatchingRoute: MatchingRoute,
   PortefeuilleRoute: PortefeuilleRoute,
+  RoadmapRoute: RoadmapRoute,
   TempsRoute: TempsRoute,
   BiensIdRoute: BiensIdRoute,
 }
