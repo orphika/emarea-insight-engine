@@ -22,7 +22,7 @@ import {
   ScoreBar,
   Section,
 } from "@/components/emarea/shell";
-import { formatSurface, getProperty, properties } from "@/data/properties";
+import { formatSurface, getProperty, properties, type Property } from "@/data/properties";
 import { setSelectedProperty, useRequirement } from "@/data/requirement";
 import { scoreProperty } from "@/lib/matching";
 
