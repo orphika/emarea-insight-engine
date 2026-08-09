@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BesoinRouteImport } from './routes/besoin'
 import { Route as PortefeuilleRouteImport } from './routes/portefeuille'
 import { Route as BiensIdRouteImport } from './routes/biens.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BesoinRoute = BesoinRouteImport.update({
+  id: '/besoin',
+  path: '/besoin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PortefeuilleRoute = PortefeuilleRouteImport.update({
@@ -31,30 +37,34 @@ const BiensIdRoute = BiensIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/besoin': typeof BesoinRoute
   '/portefeuille': typeof PortefeuilleRoute
   '/biens/$id': typeof BiensIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/besoin': typeof BesoinRoute
   '/portefeuille': typeof PortefeuilleRoute
   '/biens/$id': typeof BiensIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/besoin': typeof BesoinRoute
   '/portefeuille': typeof PortefeuilleRoute
   '/biens/$id': typeof BiensIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/portefeuille' | '/biens/$id'
+  fullPaths: '/' | '/besoin' | '/portefeuille' | '/biens/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/portefeuille' | '/biens/$id'
-  id: '__root__' | '/' | '/portefeuille' | '/biens/$id'
+  to: '/' | '/besoin' | '/portefeuille' | '/biens/$id'
+  id: '__root__' | '/' | '/besoin' | '/portefeuille' | '/biens/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BesoinRoute: typeof BesoinRoute
   PortefeuilleRoute: typeof PortefeuilleRoute
   BiensIdRoute: typeof BiensIdRoute
 }
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/besoin': {
+      id: '/besoin'
+      path: '/besoin'
+      fullPath: '/besoin'
+      preLoaderRoute: typeof BesoinRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/portefeuille': {
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BesoinRoute: BesoinRoute,
   PortefeuilleRoute: PortefeuilleRoute,
   BiensIdRoute: BiensIdRoute,
 }
