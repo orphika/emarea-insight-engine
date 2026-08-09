@@ -10,33 +10,128 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BesoinRouteImport } from './routes/besoin'
+import { Route as DossierRouteImport } from './routes/dossier'
+import { Route as MatchingRouteImport } from './routes/matching'
+import { Route as PortefeuilleRouteImport } from './routes/portefeuille'
+import { Route as RoadmapRouteImport } from './routes/roadmap'
+import { Route as TempsRouteImport } from './routes/temps'
+import { Route as BiensIdRouteImport } from './routes/biens.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BesoinRoute = BesoinRouteImport.update({
+  id: '/besoin',
+  path: '/besoin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DossierRoute = DossierRouteImport.update({
+  id: '/dossier',
+  path: '/dossier',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MatchingRoute = MatchingRouteImport.update({
+  id: '/matching',
+  path: '/matching',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortefeuilleRoute = PortefeuilleRouteImport.update({
+  id: '/portefeuille',
+  path: '/portefeuille',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RoadmapRoute = RoadmapRouteImport.update({
+  id: '/roadmap',
+  path: '/roadmap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TempsRoute = TempsRouteImport.update({
+  id: '/temps',
+  path: '/temps',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BiensIdRoute = BiensIdRouteImport.update({
+  id: '/biens/$id',
+  path: '/biens/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/besoin': typeof BesoinRoute
+  '/dossier': typeof DossierRoute
+  '/matching': typeof MatchingRoute
+  '/portefeuille': typeof PortefeuilleRoute
+  '/roadmap': typeof RoadmapRoute
+  '/temps': typeof TempsRoute
+  '/biens/$id': typeof BiensIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/besoin': typeof BesoinRoute
+  '/dossier': typeof DossierRoute
+  '/matching': typeof MatchingRoute
+  '/portefeuille': typeof PortefeuilleRoute
+  '/roadmap': typeof RoadmapRoute
+  '/temps': typeof TempsRoute
+  '/biens/$id': typeof BiensIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/besoin': typeof BesoinRoute
+  '/dossier': typeof DossierRoute
+  '/matching': typeof MatchingRoute
+  '/portefeuille': typeof PortefeuilleRoute
+  '/roadmap': typeof RoadmapRoute
+  '/temps': typeof TempsRoute
+  '/biens/$id': typeof BiensIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/besoin'
+    | '/dossier'
+    | '/matching'
+    | '/portefeuille'
+    | '/roadmap'
+    | '/temps'
+    | '/biens/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/besoin'
+    | '/dossier'
+    | '/matching'
+    | '/portefeuille'
+    | '/roadmap'
+    | '/temps'
+    | '/biens/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/besoin'
+    | '/dossier'
+    | '/matching'
+    | '/portefeuille'
+    | '/roadmap'
+    | '/temps'
+    | '/biens/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BesoinRoute: typeof BesoinRoute
+  DossierRoute: typeof DossierRoute
+  MatchingRoute: typeof MatchingRoute
+  PortefeuilleRoute: typeof PortefeuilleRoute
+  RoadmapRoute: typeof RoadmapRoute
+  TempsRoute: typeof TempsRoute
+  BiensIdRoute: typeof BiensIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,22 +143,68 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/besoin': {
+      id: '/besoin'
+      path: '/besoin'
+      fullPath: '/besoin'
+      preLoaderRoute: typeof BesoinRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dossier': {
+      id: '/dossier'
+      path: '/dossier'
+      fullPath: '/dossier'
+      preLoaderRoute: typeof DossierRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/matching': {
+      id: '/matching'
+      path: '/matching'
+      fullPath: '/matching'
+      preLoaderRoute: typeof MatchingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portefeuille': {
+      id: '/portefeuille'
+      path: '/portefeuille'
+      fullPath: '/portefeuille'
+      preLoaderRoute: typeof PortefeuilleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/roadmap': {
+      id: '/roadmap'
+      path: '/roadmap'
+      fullPath: '/roadmap'
+      preLoaderRoute: typeof RoadmapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/temps': {
+      id: '/temps'
+      path: '/temps'
+      fullPath: '/temps'
+      preLoaderRoute: typeof TempsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/biens/$id': {
+      id: '/biens/$id'
+      path: '/biens/$id'
+      fullPath: '/biens/$id'
+      preLoaderRoute: typeof BiensIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BesoinRoute: BesoinRoute,
+  DossierRoute: DossierRoute,
+  MatchingRoute: MatchingRoute,
+  PortefeuilleRoute: PortefeuilleRoute,
+  RoadmapRoute: RoadmapRoute,
+  TempsRoute: TempsRoute,
+  BiensIdRoute: BiensIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

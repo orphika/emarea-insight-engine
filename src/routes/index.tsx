@@ -1,24 +1,121 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, Clock, Database, Layers, Sparkles } from "lucide-react";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+import { CtaLink, DemoTag, Section } from "@/components/emarea/shell";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "EMAREA Digital Intelligence — Démonstration immobilier industriel" },
+      {
+        name: "description",
+        content:
+          "Prototype conceptuel : transformer chaque bien industriel en actif digital exploitable — centraliser, présenter, qualifier, trouver plus vite.",
+      },
+      { property: "og:title", content: "EMAREA Digital Intelligence — Démonstration" },
+      {
+        property: "og:description",
+        content:
+          "Centraliser. Présenter. Qualifier. Trouver plus vite. Une démonstration d'infrastructure digitale pour l'immobilier d'entreprise.",
+      },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
+const pillars = [
+  {
+    icon: Clock,
+    title: "Gain de temps",
+    body: "La même information n'est plus recherchée cinq fois : elle est saisie une fois et réutilisée partout.",
+  },
+  {
+    icon: Database,
+    title: "Centralisation",
+    body: "Chaque bien possède un dossier unique : caractéristiques techniques, documents, médias, contacts.",
+  },
+  {
+    icon: Layers,
+    title: "Image professionnelle",
+    body: "Un actif industriel se présente comme un produit structuré, pas comme une simple annonce.",
+  },
+  {
+    icon: Sparkles,
+    title: "Capacité commerciale",
+    body: "Traiter davantage de biens et de demandes sans augmenter proportionnellement le travail administratif.",
+  },
+];
+
+const journey = [
+  "Besoin client structuré",
+  "Recherche dans le portefeuille",
+  "Correspondances expliquées",
+  "Dossier client généré",
+];
+
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      <section className="relative border-b border-border">
+        <div className="absolute inset-0 hairline-grid opacity-[0.35]" aria-hidden="true" />
+        <div className="relative mx-auto max-w-7xl px-5 py-20 md:py-32">
+          <DemoTag>Prototype conceptuel — non contractuel</DemoTag>
+          <h1 className="mt-8 max-w-4xl text-4xl font-bold leading-[1.05] md:text-6xl">
+            Et si chaque bien EMAREA devenait un actif digital exploitable&nbsp;?
+          </h1>
+          <p className="mt-6 max-w-2xl font-display text-xl text-muted-foreground md:text-2xl">
+            Centraliser. Présenter. Qualifier. Trouver plus vite.
+          </p>
+          <div className="mt-10 flex flex-wrap gap-3">
+            <CtaLink to="/portefeuille">
+              Voir la démonstration
+              <ArrowRight className="h-4 w-4" />
+            </CtaLink>
+            <CtaLink to="/roadmap" variant="ghost">
+              Comprendre le fonctionnement
+            </CtaLink>
+          </div>
+          <p className="mt-10 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            Cette démonstration ne présente pas un site vitrine. Elle montre la couche
+            d'information qui pourrait se trouver derrière la présence digitale d'un cabinet
+            d'immobilier d'entreprise.
+          </p>
+        </div>
+      </section>
+
+      <Section>
+        <div className="grid gap-px border border-border bg-border md:grid-cols-2 lg:grid-cols-4">
+          {pillars.map((p) => (
+            <div key={p.title} className="bg-surface p-7">
+              <p.icon className="h-5 w-5 text-primary" strokeWidth={1.5} />
+              <h2 className="mt-6 label-caps text-foreground">{p.title}</h2>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      <Section className="border-t border-border">
+        <p className="label-caps text-primary">Le parcours de la démonstration</p>
+        <h2 className="mt-4 max-w-3xl text-2xl font-bold md:text-4xl">
+          Un scénario complet, du cahier des charges au dossier envoyé au client.
+        </h2>
+        <ol className="mt-10 grid gap-px border border-border bg-border md:grid-cols-4">
+          {journey.map((label, i) => (
+            <li key={label} className="bg-surface p-7">
+              <span className="font-display text-3xl font-bold text-primary">0{i + 1}</span>
+              <p className="mt-4 text-sm leading-relaxed text-foreground">{label}</p>
+            </li>
+          ))}
+        </ol>
+        <p className="mt-8 text-sm text-muted-foreground">
+          Environ cinq minutes suffisent pour parcourir l'ensemble.{" "}
+          <Link to="/besoin" className="text-foreground underline underline-offset-4">
+            Commencer par le besoin client
+          </Link>
+          .
+        </p>
+      </Section>
+    </>
   );
 }
