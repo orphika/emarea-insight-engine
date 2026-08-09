@@ -24,7 +24,7 @@ export const Route = createFileRoute("/dossier")({
       },
     ],
   }),
-  component: Dossier;
+  component: Dossier,
 });
 
 const labels = {
