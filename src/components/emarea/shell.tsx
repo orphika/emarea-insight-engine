@@ -141,7 +141,7 @@ export function CtaLink({
   variant = "primary",
   children,
 }: {
-  to: string;
+  to: LinkProps["to"];
   variant?: "primary" | "ghost";
   children: ReactNode;
 }) {
