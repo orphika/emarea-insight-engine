@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BesoinRouteImport } from './routes/besoin'
+import { Route as DossierRouteImport } from './routes/dossier'
 import { Route as MatchingRouteImport } from './routes/matching'
 import { Route as PortefeuilleRouteImport } from './routes/portefeuille'
 import { Route as BiensIdRouteImport } from './routes/biens.$id'
@@ -23,6 +24,11 @@ const IndexRoute = IndexRouteImport.update({
 const BesoinRoute = BesoinRouteImport.update({
   id: '/besoin',
   path: '/besoin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DossierRoute = DossierRouteImport.update({
+  id: '/dossier',
+  path: '/dossier',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MatchingRoute = MatchingRouteImport.update({
@@ -44,6 +50,7 @@ const BiensIdRoute = BiensIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/besoin': typeof BesoinRoute
+  '/dossier': typeof DossierRoute
   '/matching': typeof MatchingRoute
   '/portefeuille': typeof PortefeuilleRoute
   '/biens/$id': typeof BiensIdRoute
@@ -51,6 +58,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/besoin': typeof BesoinRoute
+  '/dossier': typeof DossierRoute
   '/matching': typeof MatchingRoute
   '/portefeuille': typeof PortefeuilleRoute
   '/biens/$id': typeof BiensIdRoute
@@ -59,22 +67,32 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/besoin': typeof BesoinRoute
+  '/dossier': typeof DossierRoute
   '/matching': typeof MatchingRoute
   '/portefeuille': typeof PortefeuilleRoute
   '/biens/$id': typeof BiensIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/besoin' | '/matching' | '/portefeuille' | '/biens/$id'
+  fullPaths:
+    '/' | '/besoin' | '/dossier' | '/matching' | '/portefeuille' | '/biens/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/besoin' | '/matching' | '/portefeuille' | '/biens/$id'
+  to:
+    '/' | '/besoin' | '/dossier' | '/matching' | '/portefeuille' | '/biens/$id'
   id:
-    '__root__' | '/' | '/besoin' | '/matching' | '/portefeuille' | '/biens/$id'
+    | '__root__'
+    | '/'
+    | '/besoin'
+    | '/dossier'
+    | '/matching'
+    | '/portefeuille'
+    | '/biens/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BesoinRoute: typeof BesoinRoute
+  DossierRoute: typeof DossierRoute
   MatchingRoute: typeof MatchingRoute
   PortefeuilleRoute: typeof PortefeuilleRoute
   BiensIdRoute: typeof BiensIdRoute
@@ -94,6 +112,13 @@ declare module '@tanstack/react-router' {
       path: '/besoin'
       fullPath: '/besoin'
       preLoaderRoute: typeof BesoinRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dossier': {
+      id: '/dossier'
+      path: '/dossier'
+      fullPath: '/dossier'
+      preLoaderRoute: typeof DossierRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/matching': {
@@ -123,6 +148,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BesoinRoute: BesoinRoute,
+  DossierRoute: DossierRoute,
   MatchingRoute: MatchingRoute,
   PortefeuilleRoute: PortefeuilleRoute,
   BiensIdRoute: BiensIdRoute,
