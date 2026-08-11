@@ -3,6 +3,7 @@ import { ArrowRight, FileText, Images, Ruler, Truck } from "lucide-react";
 import { useMemo, useState } from "react";
 
 import { DemoTag, PageHeader, Section } from "@/components/emarea/shell";
+import { Reveal, StaggerGroup, StaggerItem } from "@/components/emarea/motion";
 import { formatSurface, portfolioStats, properties } from "@/data/properties";
 
 export const Route = createFileRoute("/portefeuille")({
@@ -14,7 +15,10 @@ export const Route = createFileRoute("/portefeuille")({
         content:
           "Cinq biens de démonstration (industriel, logistique, commercial) structurés en dossiers digitaux consultables et filtrables.",
       },
-      { property: "og:title", content: "Portefeuille de démonstration — EMAREA Digital Intelligence" },
+      {
+        property: "og:title",
+        content: "Portefeuille de démonstration — EMAREA Digital Intelligence",
+      },
       {
         property: "og:description",
         content:
@@ -65,17 +69,22 @@ function Portefeuille() {
       </PageHeader>
 
       <Section>
-        <div className="grid gap-px border border-border bg-border sm:grid-cols-3 lg:grid-cols-6">
+        <StaggerGroup className="grid gap-px border border-border bg-border sm:grid-cols-3 lg:grid-cols-6">
           {stats.map((s) => (
-            <div key={s.label} className="bg-surface p-6">
+            <StaggerItem key={s.label} className="bg-surface p-6">
               <p className="font-display text-4xl font-bold text-foreground">{s.value}</p>
               <p className="mt-2 label-caps text-muted-foreground">{s.label}</p>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerGroup>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-3">
-          <Filter label="Type" value={kind} options={[...kinds]} onChange={(v) => setKind(v as typeof kind)} />
+          <Filter
+            label="Type"
+            value={kind}
+            options={[...kinds]}
+            onChange={(v) => setKind(v as typeof kind)}
+          />
           <Filter label="Wilaya" value={wilaya} options={wilayas} onChange={setWilaya} />
           <Filter
             label="Statut"
@@ -85,61 +94,70 @@ function Portefeuille() {
           />
         </div>
 
-        <div className="mt-10 space-y-px bg-border">
+        <StaggerGroup key={`${kind}-${status}-${wilaya}`} className="mt-10 space-y-px bg-border">
           {filtered.map((p) => (
-            <Link
-              key={p.id}
-              to="/biens/$id"
-              params={{ id: p.id }}
-              className="group block bg-surface p-6 transition-colors hover:bg-accent md:p-8"
-            >
-              {p.photos?.[0] && (
-                <div className="mb-5 aspect-21/9 overflow-hidden border border-border">
-                  <img
-                    src={p.photos[0].src}
-                    alt={p.photos[0].alt}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
+            <StaggerItem key={p.id}>
+              <Link
+                to="/biens/$id"
+                params={{ id: p.id }}
+                className="group block bg-surface p-6 transition-colors hover:bg-accent md:p-8"
+              >
+                {p.photos?.[0] && (
+                  <div className="mb-5 aspect-21/9 overflow-hidden border border-border">
+                    <img
+                      src={p.photos[0].src}
+                      alt={p.photos[0].alt}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                )}
+                <div className="flex flex-wrap items-center gap-3">
+                  <span className="label-caps text-primary">{p.reference}</span>
+                  <span className="label-caps text-muted-foreground">{p.kind}</span>
+                  <span className="label-caps text-muted-foreground">{p.transaction}</span>
+                  <span className="ml-auto label-caps text-foreground">{p.status}</span>
                 </div>
-              )}
-              <div className="flex flex-wrap items-center gap-3">
-                <span className="label-caps text-primary">{p.reference}</span>
-                <span className="label-caps text-muted-foreground">{p.kind}</span>
-                <span className="label-caps text-muted-foreground">{p.transaction}</span>
-                <span className="ml-auto label-caps text-foreground">{p.status}</span>
-              </div>
-              <h2 className="mt-4 text-xl font-bold md:text-2xl">{p.title}</h2>
-              <p className="mt-1 text-sm text-muted-foreground">
-                {p.commune}, {p.wilaya}
-              </p>
-              <dl className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                <Metric icon={Ruler} label="Surface totale" value={formatSurface(p.surfaceTotale)} />
-                <Metric icon={Ruler} label="Surface bâtie" value={formatSurface(p.surfaceBatie)} />
-                <Metric
-                  icon={Truck}
-                  label="Accès grand tonnage"
-                  value={p.capabilities.grandTonnage ? "Oui" : "Non"}
-                />
-                <Metric
-                  icon={FileText}
-                  label="Documents"
-                  value={`${p.documents.length} pièces`}
-                />
-              </dl>
-              <p className="mt-6 flex items-center gap-2 text-sm font-semibold text-foreground">
-                <Images className="h-4 w-4 text-muted-foreground" />
-                {p.mediaPhotos} photos · {p.mediaVideos} vidéo(s)
-                <ArrowRight className="ml-auto h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </p>
-            </Link>
+                <h2 className="mt-4 text-xl font-bold md:text-2xl">{p.title}</h2>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {p.commune}, {p.wilaya}
+                </p>
+                <dl className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                  <Metric
+                    icon={Ruler}
+                    label="Surface totale"
+                    value={formatSurface(p.surfaceTotale)}
+                  />
+                  <Metric
+                    icon={Ruler}
+                    label="Surface bâtie"
+                    value={formatSurface(p.surfaceBatie)}
+                  />
+                  <Metric
+                    icon={Truck}
+                    label="Accès grand tonnage"
+                    value={p.capabilities.grandTonnage ? "Oui" : "Non"}
+                  />
+                  <Metric
+                    icon={FileText}
+                    label="Documents"
+                    value={`${p.documents.length} pièces`}
+                  />
+                </dl>
+                <p className="mt-6 flex items-center gap-2 text-sm font-semibold text-foreground">
+                  <Images className="h-4 w-4 text-muted-foreground" />
+                  {p.mediaPhotos} photos · {p.mediaVideos} vidéo(s)
+                  <ArrowRight className="ml-auto h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </p>
+              </Link>
+            </StaggerItem>
           ))}
           {filtered.length === 0 && (
             <p className="bg-surface p-8 text-sm text-muted-foreground">
               Aucun bien de démonstration ne correspond à ces filtres.
             </p>
           )}
-        </div>
+        </StaggerGroup>
       </Section>
     </>
   );

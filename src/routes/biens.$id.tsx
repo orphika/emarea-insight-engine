@@ -22,6 +22,7 @@ import {
   ScoreBar,
   Section,
 } from "@/components/emarea/shell";
+import { Reveal } from "@/components/emarea/motion";
 import { formatSurface, getProperty, properties, type Property } from "@/data/properties";
 import { setSelectedProperty, useRequirement } from "@/data/requirement";
 import { scoreProperty } from "@/lib/matching";
@@ -35,7 +36,10 @@ export const Route = createFileRoute("/biens/$id")({
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
-        meta: [{ title: "Bien indisponible — EMAREA Digital Intelligence" }, { name: "robots", content: "noindex" }],
+        meta: [
+          { title: "Bien indisponible — EMAREA Digital Intelligence" },
+          { name: "robots", content: "noindex" },
+        ],
       };
     }
     const title = `${loaderData.property.title} — fiche de démonstration`;
@@ -95,7 +99,7 @@ function PropertyDetail() {
 
       <Section>
         <div className="grid gap-px border border-border bg-border lg:grid-cols-3">
-          <div className="bg-surface p-7 lg:col-span-2">
+          <Reveal className="bg-surface p-7 lg:col-span-2">
             <h2 className="label-caps text-primary">Informations générales</h2>
             <dl className="mt-5">
               <DataRow label="Référence" value={property.reference} />
@@ -117,7 +121,11 @@ function PropertyDetail() {
 
             <h2 className="mt-10 label-caps text-primary">Accès, utilités & équipements</h2>
             <div className="mt-5 grid gap-px border border-border bg-border sm:grid-cols-2">
-              <IconFact icon={Truck} label="Accès grand tonnage" value={property.capabilities.grandTonnage ? "Oui" : "Non"} />
+              <IconFact
+                icon={Truck}
+                label="Accès grand tonnage"
+                value={property.capabilities.grandTonnage ? "Oui" : "Non"}
+              />
               <IconFact icon={RouteIcon} label="Axe routier" value={property.autoroute} />
               <IconFact icon={Zap} label="Électricité" value={property.electricite} />
               <IconFact icon={Droplets} label="Eau" value={property.eau} />
@@ -134,9 +142,9 @@ function PropertyDetail() {
                 </li>
               ))}
             </ul>
-          </div>
+          </Reveal>
 
-          <div className="space-y-10 bg-surface p-7">
+          <Reveal className="space-y-10 bg-surface p-7" delay={0.08}>
             <div>
               <h2 className="label-caps text-primary">Compatibilité avec le besoin client</h2>
               <p className="mt-4 font-display text-6xl font-bold text-foreground">{score}%</p>
@@ -178,7 +186,10 @@ function PropertyDetail() {
               <ul className="mt-4 space-y-3">
                 {property.documents.map((d) => (
                   <li key={d.label} className="flex items-start gap-3 border-b border-border pb-3">
-                    <FileText className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" strokeWidth={1.5} />
+                    <FileText
+                      className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground"
+                      strokeWidth={1.5}
+                    />
                     <span className="flex-1 text-sm text-foreground">{d.label}</span>
                     <span
                       className={
@@ -218,10 +229,9 @@ function PropertyDetail() {
                     ))}
                   </div>
                   <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-                    {property.photos.length} photographies réelles du bien, fournies par le
-                    Cabinet EMAREA. Les {property.mediaPhotos - property.photos.length}{" "}
-                    photos restantes du dossier ne sont pas encore numérisées dans ce
-                    prototype.
+                    {property.photos.length} photographies réelles du bien, fournies par le Cabinet
+                    EMAREA. Les {property.mediaPhotos - property.photos.length} photos restantes du
+                    dossier ne sont pas encore numérisées dans ce prototype.
                   </p>
                 </>
               ) : (
@@ -237,8 +247,8 @@ function PropertyDetail() {
                     ))}
                   </div>
                   <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-                    Emplacements réservés aux photographies réelles du bien. Aucune image
-                    générée n'est utilisée dans la galerie d'un bien.
+                    Emplacements réservés aux photographies réelles du bien. Aucune image générée
+                    n'est utilisée dans la galerie d'un bien.
                   </p>
                 </>
               )}
@@ -251,10 +261,10 @@ function PropertyDetail() {
             </div>
 
             <DemoTag>Fiche fictive — données de démonstration</DemoTag>
-          </div>
+          </Reveal>
         </div>
 
-        <div className="mt-12">
+        <Reveal className="mt-12" delay={0.05}>
           <p className="label-caps text-muted-foreground">Autres biens du portefeuille</p>
           <div className="mt-4 grid gap-px border border-border bg-border sm:grid-cols-2">
             {others.map((o) => (
@@ -272,7 +282,7 @@ function PropertyDetail() {
               </Link>
             ))}
           </div>
-        </div>
+        </Reveal>
       </Section>
     </>
   );

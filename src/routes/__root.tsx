@@ -11,6 +11,7 @@ import type { ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { DemoShell } from "@/components/emarea/shell";
+import { PageTransition } from "@/components/emarea/motion";
 
 function NotFoundComponent() {
   return (
@@ -119,7 +120,9 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <DemoShell>
-        <Outlet />
+        <PageTransition>
+          <Outlet />
+        </PageTransition>
       </DemoShell>
     </QueryClientProvider>
   );
