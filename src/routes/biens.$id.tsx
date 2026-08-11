@@ -203,20 +203,45 @@ function PropertyDetail() {
                 <Images className="h-4 w-4 text-muted-foreground" strokeWidth={1.5} />
                 {property.mediaPhotos} photos · {property.mediaVideos} vidéo(s)
               </p>
-              <div className="mt-4 grid grid-cols-3 gap-px bg-border">
-                {Array.from({ length: 6 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="flex aspect-4/3 items-center justify-center bg-muted p-2 text-center label-caps text-muted-foreground"
-                  >
-                    Photo {i + 1}
+              {property.photos && property.photos.length > 0 ? (
+                <>
+                  <div className="mt-4 grid grid-cols-3 gap-px bg-border">
+                    {property.photos.map((photo) => (
+                      <div key={photo.src} className="aspect-4/3 overflow-hidden bg-muted">
+                        <img
+                          src={photo.src}
+                          alt={photo.alt}
+                          loading="lazy"
+                          className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                        />
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-              <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-                Emplacements réservés aux photographies réelles du bien. Aucune image générée n'est
-                utilisée dans la galerie d'un bien.
-              </p>
+                  <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+                    {property.photos.length} photographies réelles du bien, fournies par le
+                    Cabinet EMAREA. Les {property.mediaPhotos - property.photos.length}{" "}
+                    photos restantes du dossier ne sont pas encore numérisées dans ce
+                    prototype.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <div className="mt-4 grid grid-cols-3 gap-px bg-border">
+                    {Array.from({ length: 6 }).map((_, i) => (
+                      <div
+                        key={i}
+                        className="flex aspect-4/3 items-center justify-center bg-muted p-2 text-center label-caps text-muted-foreground"
+                      >
+                        Photo {i + 1}
+                      </div>
+                    ))}
+                  </div>
+                  <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+                    Emplacements réservés aux photographies réelles du bien. Aucune image
+                    générée n'est utilisée dans la galerie d'un bien.
+                  </p>
+                </>
+              )}
             </div>
 
             <div>

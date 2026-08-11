@@ -1,3 +1,15 @@
+// 7 photos réelles du bien "site-3s-boumerdes" (fournies par le client, dossier
+// assets/property-01/final/, voir assets/SOURCES.md §7 pour la provenance). Les 4
+// autres biens de démonstration restent sans photos réelles — pas de substitution
+// générique (règle de non-invention du projet).
+import propertyPhoto01 from "../../assets/property-01/final/01-cour-camions-gares.jpg";
+import propertyPhoto02 from "../../assets/property-01/final/02-showroom-mack.jpg";
+import propertyPhoto03 from "../../assets/property-01/final/03-quai-chargement-exterieur.jpg";
+import propertyPhoto04 from "../../assets/property-01/final/04-entrepot-interieur-allees.jpg";
+import propertyPhoto05 from "../../assets/property-01/final/05-showroom-man-reception.jpg";
+import propertyPhoto06 from "../../assets/property-01/final/06-batiment-quai-facade.jpg";
+import propertyPhoto07 from "../../assets/property-01/final/07-entrepot-rayonnage.jpg";
+
 export type PropertyKind = "Industriel" | "Logistique" | "Commercial";
 export type PropertyStatus = "Disponible" | "En discussion" | "Réservé";
 export type DocumentStatus = "Document fourni" | "Document à vérifier";
@@ -5,6 +17,11 @@ export type DocumentStatus = "Document fourni" | "Document à vérifier";
 export interface PropertyDocument {
   label: string;
   status: DocumentStatus;
+}
+
+export interface PropertyPhoto {
+  src: string;
+  alt: string;
 }
 
 export interface PropertyCapabilities {
@@ -41,6 +58,8 @@ export interface Property {
   documents: PropertyDocument[];
   mediaPhotos: number;
   mediaVideos: number;
+  /** Photos réelles rattachées au dossier — absent si non fourni (pas de placeholder). */
+  photos?: PropertyPhoto[];
   contactName: string;
   contactRole: string;
   synthese: string;
@@ -87,6 +106,15 @@ export const properties: Property[] = [
     ],
     mediaPhotos: 24,
     mediaVideos: 2,
+    photos: [
+      { src: propertyPhoto01, alt: "Vue aérienne de la cour avec plusieurs camions poids lourds garés" },
+      { src: propertyPhoto02, alt: "Showroom véhicules Mack" },
+      { src: propertyPhoto03, alt: "Quai de chargement extérieur" },
+      { src: propertyPhoto04, alt: "Intérieur de l'entrepôt, allées de circulation" },
+      { src: propertyPhoto05, alt: "Showroom MAN, espace réception" },
+      { src: propertyPhoto06, alt: "Façade du bâtiment côté quai" },
+      { src: propertyPhoto07, alt: "Entrepôt, zone de rayonnage" },
+    ],
     contactName: "Chargé d'affaires — Pôle industriel",
     contactRole: "Cabinet EMAREA (démonstration)",
     synthese:

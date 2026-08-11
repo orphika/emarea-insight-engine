@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Clock, Database, Layers, Sparkles } from "lucide-react";
+import { Clock, Database, Layers, Sparkles } from "lucide-react";
 
-import { CtaLink, DemoTag, Section } from "@/components/emarea/shell";
+import { Section } from "@/components/emarea/shell";
+import { HeroScrub } from "@/components/emarea/hero-scrub";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -56,32 +57,7 @@ const journey = [
 function Index() {
   return (
     <>
-      <section className="relative border-b border-border">
-        <div className="absolute inset-0 hairline-grid opacity-[0.35]" aria-hidden="true" />
-        <div className="relative mx-auto max-w-7xl px-5 py-20 md:py-32">
-          <DemoTag>Prototype conceptuel — non contractuel</DemoTag>
-          <h1 className="mt-8 max-w-4xl text-4xl font-bold leading-[1.05] md:text-6xl">
-            Et si chaque bien EMAREA devenait un actif digital exploitable&nbsp;?
-          </h1>
-          <p className="mt-6 max-w-2xl font-display text-xl text-muted-foreground md:text-2xl">
-            Centraliser. Présenter. Qualifier. Trouver plus vite.
-          </p>
-          <div className="mt-10 flex flex-wrap gap-3">
-            <CtaLink to="/portefeuille">
-              Voir la démonstration
-              <ArrowRight className="h-4 w-4" />
-            </CtaLink>
-            <CtaLink to="/roadmap" variant="ghost">
-              Comprendre le fonctionnement
-            </CtaLink>
-          </div>
-          <p className="mt-10 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            Cette démonstration ne présente pas un site vitrine. Elle montre la couche
-            d'information qui pourrait se trouver derrière la présence digitale d'un cabinet
-            d'immobilier d'entreprise.
-          </p>
-        </div>
-      </section>
+      <HeroScrub />
 
       <Section>
         <div className="grid gap-px border border-border bg-border md:grid-cols-2 lg:grid-cols-4">

@@ -124,10 +124,32 @@ Constaté en lisant le code :
   renseigné, sinon garder le comportement actuel (probablement un simple compteur ou un
   placeholder).
 
+## 6. Photos réelles — bien "site-3s-boumerdes" — OBTENUES (2026-08-11)
+
+| Champ | Valeur |
+|---|---|
+| Fichiers locaux | `assets/property-01/final/01-cour-camions-gares.jpg` à `07-entrepot-rayonnage.jpg` (7 fichiers) |
+| Origine | Envoyées par Sofiane via WhatsApp (fichiers bruts dans `assets/property-01/extracted/`, versions rognées dans `assets/property-01/cropped/`, versions finales nommées dans `assets/property-01/final/`) |
+| Nature | Photographies réelles d'un site industriel poids lourds (cour avec camions garés, showrooms Mack/MAN, quai de chargement, entrepôt intérieur) |
+| Confiance | Élevée — photos réelles fournies directement par le client, pas de recherche web |
+| Statut | Branchées dans `src/data/properties.ts` (champ `photos`) sur le bien `site-3s-boumerdes` uniquement — cohérent avec la fiche existante (showroom, atelier SAV poids lourds). Les 4 autres biens de démonstration restent sans photo réelle. |
+
+## 7. Vidéo drone hero — illustration générée — OBTENUE (2026-08-11)
+
+| Champ | Valeur |
+|---|---|
+| Fichier local | `assets/property-01/hero-drone-entrepot.mp4` |
+| Origine | Générée par le client via Google Flow (IA générative vidéo) — survol drone d'un entrepôt logistique |
+| Nature | **Illustration générée, pas un tournage réel d'un site EMAREA** |
+| Usage | Fond vidéo de la section hero de la page d'accueil (`src/components/emarea/hero-scrub.tsx`), avec effet de scroll-scrub GSAP ScrollTrigger |
+| Étiquetage obligatoire | Badge visible sur la page ("Vidéo — illustration générée, non tournée sur un site EMAREA") — voir `.hero-scrub-illustration-badge` dans `hero-scrub.tsx`. Ne jamais retirer ce badge ni présenter cette vidéo comme un tournage réel. |
+
 ## Règle de non-invention (rappel)
 
 Aucune image de bien EMAREA n'a été inventée, générée par IA, ni substituée par une image
-générique. `assets/property-01/` et `assets/property-02/` restent vides tant que Sofiane n'y a
-pas déposé de vraies photos avec leur source documentée ci-dessus. Le composant logo
+générique dans les fiches biens. Les 7 photos du §6 sont réelles (fournies par le client) ; la
+vidéo drone du §7 est une illustration générée et reste étiquetée comme telle partout où elle
+apparaît. `assets/property-02/` reste vide tant que Sofiane n'y a pas déposé de vraies photos
+d'un second bien avec leur source documentée ci-dessus. Le composant logo
 (`src/components/emarea/logo.tsx`) reste sur son texte typographique tant que le logo n'est
 pas branché (voir section suivante).

@@ -93,6 +93,16 @@ function Portefeuille() {
               params={{ id: p.id }}
               className="group block bg-surface p-6 transition-colors hover:bg-accent md:p-8"
             >
+              {p.photos?.[0] && (
+                <div className="mb-5 aspect-21/9 overflow-hidden border border-border">
+                  <img
+                    src={p.photos[0].src}
+                    alt={p.photos[0].alt}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+              )}
               <div className="flex flex-wrap items-center gap-3">
                 <span className="label-caps text-primary">{p.reference}</span>
                 <span className="label-caps text-muted-foreground">{p.kind}</span>
