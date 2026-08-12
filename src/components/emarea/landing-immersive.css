@@ -85,7 +85,7 @@
   border: 1px solid color-mix(in oklch, var(--border-strong) 55%, transparent);
 }
 
-@media (prefers-reduced-motion: reduce), (max-width: 768px) {
+@media (prefers-reduced-motion: reduce) {
   .landing-immersive-fixed-video,
   .landing-immersive-progress,
   .landing-immersive-illustration-badge {

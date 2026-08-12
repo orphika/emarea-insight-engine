@@ -42,8 +42,7 @@ export function LandingBackground({
     if (typeof window === "undefined") return;
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
-    if (reduceMotion || isMobile) return;
+    if (reduceMotion) return;
 
     let cancelled = false;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
