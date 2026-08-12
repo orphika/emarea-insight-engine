@@ -1,28 +1,52 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
-import { Menu } from "lucide-react";
+import { Globe, Menu } from "lucide-react";
 import { useState, type ReactNode } from "react";
 
 import { EmareaLogo } from "@/components/emarea/logo";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/lib/i18n";
 
 const steps = [
-  { to: "/", label: "Intro" },
-  { to: "/portefeuille", label: "Portefeuille" },
-  { to: "/besoin", label: "Besoin client" },
-  { to: "/matching", label: "Correspondances" },
-  { to: "/dossier", label: "Dossier client" },
-  { to: "/temps", label: "Temps gagné" },
-  { to: "/roadmap", label: "Roadmap" },
+  { to: "/", key: "intro" },
+  { to: "/portefeuille", key: "portefeuille" },
+  { to: "/besoin", key: "besoin" },
+  { to: "/matching", key: "matching" },
+  { to: "/dossier", key: "dossier" },
+  { to: "/temps", key: "temps" },
+  { to: "/roadmap", key: "roadmap" },
 ] as const;
+
+/**
+ * Bascule FR/EN. Seule la route "/" (landing) est intégralement traduite pour l'instant —
+ * voir note dans src/lib/i18n.tsx — mais nav/footer/bannière sont partagés par toutes les
+ * routes donc traduits ici pour rester cohérents quelle que soit la page affichée.
+ */
+function LanguageToggle() {
+  const { lang, setLang, t } = useLanguage();
+  const next = lang === "fr" ? "en" : "fr";
+
+  return (
+    <button
+      type="button"
+      onClick={() => setLang(next)}
+      aria-label={t.langToggleLabel}
+      className="flex items-center gap-1.5 border border-border px-2.5 py-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground transition-colors hover:text-foreground"
+    >
+      <Globe className="h-3.5 w-3.5" strokeWidth={1.5} />
+      {t.langToggleShort}
+    </button>
+  );
+}
 
 export function DemoShell({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <div className="border-b border-border bg-surface">
         <p className="mx-auto max-w-7xl px-5 py-2 label-caps text-muted-foreground">
-          Prototype conceptuel — données de démonstration
+          {t.topBanner}
         </p>
       </div>
 
@@ -41,20 +65,23 @@ export function DemoShell({ children }: { children: ReactNode }) {
                 activeProps={{ className: "text-foreground" }}
                 activeOptions={{ exact: s.to === "/" }}
               >
-                {s.label}
+                {t.nav[s.key]}
               </Link>
             ))}
           </nav>
 
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            aria-label="Ouvrir le menu"
-            aria-expanded={open}
-            className="flex h-9 w-9 items-center justify-center border border-border text-muted-foreground transition-colors hover:text-foreground lg:hidden"
-          >
-            <Menu className="h-4 w-4" />
-          </button>
+          <div className="flex items-center gap-2">
+            <LanguageToggle />
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              aria-label="Ouvrir le menu"
+              aria-expanded={open}
+              className="flex h-9 w-9 items-center justify-center border border-border text-muted-foreground transition-colors hover:text-foreground lg:hidden"
+            >
+              <Menu className="h-4 w-4" />
+            </button>
+          </div>
         </div>
 
         {open && (
@@ -68,7 +95,7 @@ export function DemoShell({ children }: { children: ReactNode }) {
                 activeProps={{ className: "text-foreground" }}
                 activeOptions={{ exact: s.to === "/" }}
               >
-                {s.label}
+                {t.nav[s.key]}
               </Link>
             ))}
           </nav>
@@ -79,11 +106,9 @@ export function DemoShell({ children }: { children: ReactNode }) {
 
       <footer className="border-t border-border bg-surface">
         <div className="mx-auto max-w-7xl space-y-3 px-5 py-10">
-          <p className="label-caps text-foreground">Prototype conceptuel — EMAREA Digital Intelligence</p>
+          <p className="label-caps text-foreground">{t.footer.tag}</p>
           <p className="max-w-3xl text-sm leading-relaxed text-muted-foreground">
-            Les données et indicateurs présentés dans cette démonstration sont fictifs sauf
-            indication contraire. Ce prototype ne décrit pas les processus internes actuels du
-            Cabinet EMAREA et n'implique aucune vérification juridique des documents évoqués.
+            {t.footer.disclaimer}
           </p>
         </div>
       </footer>
