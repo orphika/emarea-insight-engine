@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { useLanguage } from "@/lib/i18n";
 
 const steps = [
+  { to: "/guide", key: "guide" },
   { to: "/", key: "intro" },
   { to: "/portefeuille", key: "portefeuille" },
   { to: "/besoin", key: "besoin" },

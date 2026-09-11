@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BesoinRouteImport } from './routes/besoin'
 import { Route as DossierRouteImport } from './routes/dossier'
+import { Route as GuideRouteImport } from './routes/guide'
 import { Route as MatchingRouteImport } from './routes/matching'
 import { Route as PortefeuilleRouteImport } from './routes/portefeuille'
 import { Route as RoadmapRouteImport } from './routes/roadmap'
@@ -31,6 +32,11 @@ const BesoinRoute = BesoinRouteImport.update({
 const DossierRoute = DossierRouteImport.update({
   id: '/dossier',
   path: '/dossier',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuideRoute = GuideRouteImport.update({
+  id: '/guide',
+  path: '/guide',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MatchingRoute = MatchingRouteImport.update({
@@ -63,6 +69,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/besoin': typeof BesoinRoute
   '/dossier': typeof DossierRoute
+  '/guide': typeof GuideRoute
   '/matching': typeof MatchingRoute
   '/portefeuille': typeof PortefeuilleRoute
   '/roadmap': typeof RoadmapRoute
@@ -73,6 +80,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/besoin': typeof BesoinRoute
   '/dossier': typeof DossierRoute
+  '/guide': typeof GuideRoute
   '/matching': typeof MatchingRoute
   '/portefeuille': typeof PortefeuilleRoute
   '/roadmap': typeof RoadmapRoute
@@ -84,6 +92,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/besoin': typeof BesoinRoute
   '/dossier': typeof DossierRoute
+  '/guide': typeof GuideRoute
   '/matching': typeof MatchingRoute
   '/portefeuille': typeof PortefeuilleRoute
   '/roadmap': typeof RoadmapRoute
@@ -96,6 +105,7 @@ export interface FileRouteTypes {
     | '/'
     | '/besoin'
     | '/dossier'
+    | '/guide'
     | '/matching'
     | '/portefeuille'
     | '/roadmap'
@@ -106,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/besoin'
     | '/dossier'
+    | '/guide'
     | '/matching'
     | '/portefeuille'
     | '/roadmap'
@@ -116,6 +127,7 @@ export interface FileRouteTypes {
     | '/'
     | '/besoin'
     | '/dossier'
+    | '/guide'
     | '/matching'
     | '/portefeuille'
     | '/roadmap'
@@ -127,6 +139,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BesoinRoute: typeof BesoinRoute
   DossierRoute: typeof DossierRoute
+  GuideRoute: typeof GuideRoute
   MatchingRoute: typeof MatchingRoute
   PortefeuilleRoute: typeof PortefeuilleRoute
   RoadmapRoute: typeof RoadmapRoute
@@ -155,6 +168,13 @@ declare module '@tanstack/react-router' {
       path: '/dossier'
       fullPath: '/dossier'
       preLoaderRoute: typeof DossierRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guide': {
+      id: '/guide'
+      path: '/guide'
+      fullPath: '/guide'
+      preLoaderRoute: typeof GuideRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/matching': {
@@ -199,6 +219,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BesoinRoute: BesoinRoute,
   DossierRoute: DossierRoute,
+  GuideRoute: GuideRoute,
   MatchingRoute: MatchingRoute,
   PortefeuilleRoute: PortefeuilleRoute,
   RoadmapRoute: RoadmapRoute,

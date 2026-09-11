@@ -15,7 +15,7 @@ export type Lang = "fr" | "en";
 
 const STORAGE_KEY = "emarea-lang";
 
-type NavKey = "intro" | "portefeuille" | "besoin" | "matching" | "dossier" | "temps" | "roadmap";
+type NavKey = "guide" | "intro" | "portefeuille" | "besoin" | "matching" | "dossier" | "temps" | "roadmap";
 
 export type Dict = {
   nav: Record<NavKey, string>;
@@ -45,6 +45,7 @@ export type Dict = {
 const dict: Record<Lang, Dict> = {
   fr: {
     nav: {
+      guide: "Guide",
       intro: "Intro",
       portefeuille: "Portefeuille",
       besoin: "Besoin client",
@@ -103,6 +104,7 @@ const dict: Record<Lang, Dict> = {
   },
   en: {
     nav: {
+      guide: "Guide",
       intro: "Intro",
       portefeuille: "Portfolio",
       besoin: "Client brief",
