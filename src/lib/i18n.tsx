@@ -15,7 +15,17 @@ export type Lang = "fr" | "en";
 
 const STORAGE_KEY = "emarea-lang";
 
-type NavKey = "guide" | "intro" | "portefeuille" | "besoin" | "matching" | "dossier" | "temps" | "roadmap";
+type NavKey =
+  | "metier"
+  | "guide"
+  | "intro"
+  | "portefeuille"
+  | "besoin"
+  | "matching"
+  | "dossier"
+  | "temps"
+  | "rentabilite"
+  | "roadmap";
 
 export type Dict = {
   nav: Record<NavKey, string>;
@@ -45,6 +55,7 @@ export type Dict = {
 const dict: Record<Lang, Dict> = {
   fr: {
     nav: {
+      metier: "Le métier",
       guide: "Guide",
       intro: "Intro",
       portefeuille: "Portefeuille",
@@ -52,6 +63,7 @@ const dict: Record<Lang, Dict> = {
       matching: "Correspondances",
       dossier: "Dossier client",
       temps: "Temps gagné",
+      rentabilite: "Rentabilité",
       roadmap: "Roadmap",
     },
     topBanner: "Prototype conceptuel — données de démonstration",
@@ -104,6 +116,7 @@ const dict: Record<Lang, Dict> = {
   },
   en: {
     nav: {
+      metier: "The business",
       guide: "Guide",
       intro: "Intro",
       portefeuille: "Portfolio",
@@ -111,6 +124,7 @@ const dict: Record<Lang, Dict> = {
       matching: "Matches",
       dossier: "Client file",
       temps: "Time saved",
+      rentabilite: "Profitability",
       roadmap: "Roadmap",
     },
     topBanner: "Conceptual prototype — demonstration data",

@@ -14,7 +14,9 @@ import { Route as BesoinRouteImport } from './routes/besoin'
 import { Route as DossierRouteImport } from './routes/dossier'
 import { Route as GuideRouteImport } from './routes/guide'
 import { Route as MatchingRouteImport } from './routes/matching'
+import { Route as MetierRouteImport } from './routes/metier'
 import { Route as PortefeuilleRouteImport } from './routes/portefeuille'
+import { Route as RentabiliteRouteImport } from './routes/rentabilite'
 import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as TempsRouteImport } from './routes/temps'
 import { Route as BiensIdRouteImport } from './routes/biens.$id'
@@ -44,9 +46,19 @@ const MatchingRoute = MatchingRouteImport.update({
   path: '/matching',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MetierRoute = MetierRouteImport.update({
+  id: '/metier',
+  path: '/metier',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PortefeuilleRoute = PortefeuilleRouteImport.update({
   id: '/portefeuille',
   path: '/portefeuille',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RentabiliteRoute = RentabiliteRouteImport.update({
+  id: '/rentabilite',
+  path: '/rentabilite',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RoadmapRoute = RoadmapRouteImport.update({
@@ -71,7 +83,9 @@ export interface FileRoutesByFullPath {
   '/dossier': typeof DossierRoute
   '/guide': typeof GuideRoute
   '/matching': typeof MatchingRoute
+  '/metier': typeof MetierRoute
   '/portefeuille': typeof PortefeuilleRoute
+  '/rentabilite': typeof RentabiliteRoute
   '/roadmap': typeof RoadmapRoute
   '/temps': typeof TempsRoute
   '/biens/$id': typeof BiensIdRoute
@@ -82,7 +96,9 @@ export interface FileRoutesByTo {
   '/dossier': typeof DossierRoute
   '/guide': typeof GuideRoute
   '/matching': typeof MatchingRoute
+  '/metier': typeof MetierRoute
   '/portefeuille': typeof PortefeuilleRoute
+  '/rentabilite': typeof RentabiliteRoute
   '/roadmap': typeof RoadmapRoute
   '/temps': typeof TempsRoute
   '/biens/$id': typeof BiensIdRoute
@@ -94,7 +110,9 @@ export interface FileRoutesById {
   '/dossier': typeof DossierRoute
   '/guide': typeof GuideRoute
   '/matching': typeof MatchingRoute
+  '/metier': typeof MetierRoute
   '/portefeuille': typeof PortefeuilleRoute
+  '/rentabilite': typeof RentabiliteRoute
   '/roadmap': typeof RoadmapRoute
   '/temps': typeof TempsRoute
   '/biens/$id': typeof BiensIdRoute
@@ -107,7 +125,9 @@ export interface FileRouteTypes {
     | '/dossier'
     | '/guide'
     | '/matching'
+    | '/metier'
     | '/portefeuille'
+    | '/rentabilite'
     | '/roadmap'
     | '/temps'
     | '/biens/$id'
@@ -118,7 +138,9 @@ export interface FileRouteTypes {
     | '/dossier'
     | '/guide'
     | '/matching'
+    | '/metier'
     | '/portefeuille'
+    | '/rentabilite'
     | '/roadmap'
     | '/temps'
     | '/biens/$id'
@@ -129,7 +151,9 @@ export interface FileRouteTypes {
     | '/dossier'
     | '/guide'
     | '/matching'
+    | '/metier'
     | '/portefeuille'
+    | '/rentabilite'
     | '/roadmap'
     | '/temps'
     | '/biens/$id'
@@ -141,7 +165,9 @@ export interface RootRouteChildren {
   DossierRoute: typeof DossierRoute
   GuideRoute: typeof GuideRoute
   MatchingRoute: typeof MatchingRoute
+  MetierRoute: typeof MetierRoute
   PortefeuilleRoute: typeof PortefeuilleRoute
+  RentabiliteRoute: typeof RentabiliteRoute
   RoadmapRoute: typeof RoadmapRoute
   TempsRoute: typeof TempsRoute
   BiensIdRoute: typeof BiensIdRoute
@@ -184,11 +210,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MatchingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/metier': {
+      id: '/metier'
+      path: '/metier'
+      fullPath: '/metier'
+      preLoaderRoute: typeof MetierRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/portefeuille': {
       id: '/portefeuille'
       path: '/portefeuille'
       fullPath: '/portefeuille'
       preLoaderRoute: typeof PortefeuilleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rentabilite': {
+      id: '/rentabilite'
+      path: '/rentabilite'
+      fullPath: '/rentabilite'
+      preLoaderRoute: typeof RentabiliteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/roadmap': {
@@ -221,7 +261,9 @@ const rootRouteChildren: RootRouteChildren = {
   DossierRoute: DossierRoute,
   GuideRoute: GuideRoute,
   MatchingRoute: MatchingRoute,
+  MetierRoute: MetierRoute,
   PortefeuilleRoute: PortefeuilleRoute,
+  RentabiliteRoute: RentabiliteRoute,
   RoadmapRoute: RoadmapRoute,
   TempsRoute: TempsRoute,
   BiensIdRoute: BiensIdRoute,
